@@ -74,7 +74,7 @@ class FonnteService
             );
         }
 
-        $tagihan = $penghuni->jumlah_tagihan ?? $penghuni->kamar->harga_sewa;
+        $tagihan = $penghuni->sisaTagihan();
 
         $message = $this->parseTemplate($template, [
             'nama' => $penghuni->nama,

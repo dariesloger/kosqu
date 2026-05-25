@@ -14,7 +14,8 @@
     @yield('styles')
 </head>
 <body>
-    <div class="sidebar">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="sidebar" id="sidebar">
         <div class="logo">
             <h2>KOSQU</h2>
             <p style="text-transform: capitalize; letter-spacing: 0;">Tenant Portal</p>
@@ -75,7 +76,11 @@
 
     <div class="main-content">
         <header>
-            <div style="flex-grow: 1;"></div>
+            <div class="header-left" style="display: flex; align-items: center; flex-grow: 1;">
+                <button class="mobile-toggle" id="mobileToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
             
             <div class="header-right">
                 <div class="user-profile">
@@ -123,6 +128,34 @@
                 confirmButtonColor: '#2563EB'
             });
         @endif
+
+        // Mobile Sidebar Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileToggle = document.getElementById('mobileToggle');
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+            if (mobileToggle && sidebar && sidebarOverlay) {
+                function toggleSidebar() {
+                    sidebar.classList.toggle('active');
+                    sidebarOverlay.classList.toggle('active');
+                }
+
+                mobileToggle.addEventListener('click', toggleSidebar);
+                sidebarOverlay.addEventListener('click', toggleSidebar);
+
+                // Close sidebar on nav link click in mobile view
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (window.innerWidth <= 768) {
+                            sidebar.classList.remove('active');
+                            sidebarOverlay.classList.remove('active');
+                        }
+                    });
+                });
+            }
+        });
     </script>
 </body>
 </html>

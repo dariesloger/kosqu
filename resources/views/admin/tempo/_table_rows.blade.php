@@ -44,7 +44,7 @@
         @endif
     </td>
     <td style="padding: 1rem 0.5rem;">
-        <div style="font-weight: 700; color: var(--primary);">Rp {{ number_format($p->jumlah_tagihan ?? $p->kamar->harga_sewa, 0, ',', '.') }}</div>
+        <div style="font-weight: 700; color: var(--primary);">Rp {{ number_format($p->sisaTagihan(), 0, ',', '.') }}</div>
         @if($p->jumlah_tagihan)
             <div style="font-size: 0.65rem; color: #059669; font-weight: 600; text-transform: uppercase;">Custom Rate</div>
         @endif
