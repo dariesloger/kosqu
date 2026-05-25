@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 return new class extends Migration
 {
@@ -19,6 +21,15 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        // Insert default admin account automatically when migrated
+        DB::table('tb_admin')->insert([
+            'username' => 'admin',
+            'password' => Hash::make('admin123'),
+            'nama_admin' => 'Pemilik Wisma AAM',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 
     /**
