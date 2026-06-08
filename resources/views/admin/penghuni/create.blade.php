@@ -57,13 +57,18 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                     <div>
                         <label style="display: block; font-weight: 600; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">NIK</label>
-                        <input type="text" name="nik" required placeholder="16 Digit NIK" style="width: 100%; box-sizing: border-box; padding: 0.8rem; border: 1px solid #E2E8F0; border-radius: 8px; background: #F8FAFC; outline: none;">
+                        <input type="text" name="nik" pattern="\d{16}" maxlength="16" minlength="16" required title="Harus 16 digit angka" placeholder="16 Digit NIK" onchange="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%; box-sizing: border-box; padding: 0.8rem; border: 1px solid #E2E8F0; border-radius: 8px; background: #F8FAFC; outline: none;">
                         @error('nik') <div style="color: #DC2626; font-size: 0.75rem; margin-top: 0.25rem;">{{ $message }}</div> @enderror
                     </div>
 
                     <div>
                         <label style="display: block; font-weight: 600; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">No. HP</label>
-                        <input type="text" name="no_hp" required placeholder="08xxxxxxxxxx" style="width: 100%; box-sizing: border-box; padding: 0.8rem; border: 1px solid #E2E8F0; border-radius: 8px; background: #F8FAFC; outline: none;">
+                        <input type="text" name="no_hp" required placeholder="08xxxxxxxxxx" onchange="{
+                            this.value = this.value.replace(/[^0-9]/g, '') 
+                            if (this.value.startsWith('62')) {
+                                this.value = '0' + this.value.slice(2)
+                            }
+                        }" style="width: 100%; box-sizing: border-box; padding: 0.8rem; border: 1px solid #E2E8F0; border-radius: 8px; background: #F8FAFC; outline: none;">
                         @error('no_hp') <div style="color: #DC2626; font-size: 0.75rem; margin-top: 0.25rem;">{{ $message }}</div> @enderror
                     </div>
                 </div>

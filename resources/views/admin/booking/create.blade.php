@@ -118,14 +118,19 @@
 
             <div class="form-group">
                 <label>NIK (Nomor Induk Kependudukan)</label>
-                <input type="text" name="nik" value="{{ old('nik') }}" class="form-input" placeholder="16 digit NIK..." maxlength="16" required>
+                <input type="text" name="nik" value="{{ old('nik') }}" class="form-input" pattern="\d{16}" maxlength="16" minlength="16" required title="Harus 16 digit angka" placeholder="16 Digit NIK" onchange="this.value = this.value.replace(/[^0-9]/g, '')">
                 @error('nik')<p style="color: #DC2626; font-size: 0.75rem; margin-top: 0.3rem;">{{ $message }}</p>@enderror
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                 <div class="form-group">
                     <label>No. HP / WhatsApp</label>
-                    <input type="text" name="no_hp" value="{{ old('no_hp') }}" class="form-input" placeholder="08xxxxxxxxxx" required>
+                    <input type="text" name="no_hp" value="{{ old('no_hp') }}" class="form-input" placeholder="08xxxxxxxxxx" required onchange="{
+                        this.value = this.value.replace(/[^0-9]/g, '') 
+                        if (this.value.startsWith('62')) {
+                            this.value = '0' + this.value.slice(2)
+                        }
+                    }" >
                     @error('no_hp')<p style="color: #DC2626; font-size: 0.75rem; margin-top: 0.3rem;">{{ $message }}</p>@enderror
                 </div>
                 <div class="form-group">
@@ -156,7 +161,7 @@
                 
                 <div class="form-group">
                     <label>Jumlah DP / Uang Muka (Rp)</label>
-                    <input type="number" name="jumlah_dp" value="{{ old('jumlah_dp', 0) }}" class="form-input" min="0" required id="dp-input">
+                    <input type="number" name="jumlah_dp" class="form-input" min="0" required id="dp-input">
                     <p class="form-hint">Jika kurang dari total harga sewa periode tersebut, sisanya akan ditagih.</p>
                     @error('jumlah_dp')<p style="color: #DC2626; font-size: 0.75rem; margin-top: 0.3rem;">{{ $message }}</p>@enderror
                 </div>

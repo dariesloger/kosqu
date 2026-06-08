@@ -15,12 +15,12 @@
         <div style="font-weight: 700; color: #10B981;">Rp {{ number_format($trx->jumlah_bayar, 0, ',', '.') }}</div>
     </td>
     <td style="padding: 1rem 0.5rem;">
-        @if($trx->bukti_transfer)
+        @if($trx->bukti_transfer && str_contains($trx->bukti_transfer, '/'))
             <button onclick="viewProof('{{ asset('storage/' . $trx->bukti_transfer) }}', '#TRX-{{ $trx->id }}')" class="btn-proof">
                 <i class="fa-solid fa-image"></i> Lihat Bukti
             </button>
         @else
-            <span style="font-size: 0.75rem; color: var(--text-muted); font-style: italic;">No Proof</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-style: italic;">Tidak ada bukti</span>
         @endif
     </td>
     <td style="padding: 1rem 0.5rem;">
