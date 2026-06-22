@@ -114,7 +114,7 @@
                     <i class="fa-solid fa-file-circle-check"></i>
                 </div>
                 <div>
-                    <div style="font-weight: 700; color: var(--primary);">Tidak Ada Tagihan Aktif</div>
+                    <div style="font-weight: 700; color: var(--primary);">Tidak Ada Transaksi Aktif</div>
                     <div style="font-size: 0.8rem; color: var(--text-muted);">Semua pembayaran Anda sudah divalidasi.</div>
                 </div>
                 @if(!$sudahBayarBulanIni)
